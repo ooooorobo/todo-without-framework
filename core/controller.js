@@ -4,7 +4,7 @@ import todosView from "../components/todosView.js"
 import counterView from "../components/counterView.js"
 import filtersView from "../components/filtersView.js"
 import app from "../components/app.js"
-import { applyDiff } from "./render.js"
+import { applyDiff } from "./diff.js"
 
 // 레지스트리에 컴포넌트 등록
 registry.add('app', app)
