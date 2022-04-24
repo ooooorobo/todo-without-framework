@@ -1,10 +1,13 @@
 import getTodos from '../data/getTodos.js'
 import { registry } from "./registry.js"
-import todosView from "../components/todosView.js"
-import counterView from "../components/counterView.js"
-import filtersView from "../components/filtersView.js"
-import app from "../components/app.js"
+import todosView from "../components/functional/todosView.js"
+import counterView from "../components/functional/counterView.js"
+import filtersView from "../components/functional/filtersView.js"
+import app from "../components/functional/app.js"
 import { applyDiff } from "./diff.js"
+import AppComponent from "../components/web-component/AppComponent.js"
+import ListComponent from "../components/web-component/ListComponent.js"
+import FooterComponent from "../components/web-component/FooterComponent.js"
 
 // 레지스트리에 컴포넌트 등록
 registry.add('app', app)
@@ -46,5 +49,11 @@ const render = () => {
         applyDiff(document.body, main, newMain)
     })
 }
+// 함수형으로 렌더링할 경우
+// render()
 
-render()
+// 웹 컴포넌트를 사용하기 위해 레지스트리에 웹 컴포넌트를 등록한다
+window.customElements.define('todomvc-app', AppComponent)
+window.customElements.define('todomvc-list', ListComponent)
+window.customElements.define('todomvc-footer', FooterComponent)
+
