@@ -3,6 +3,7 @@ import { registry } from "./registry.js"
 import todosView from "./view/todosView.js"
 import counterView from "./view/counterView.js"
 import filtersView from "./view/filtersView.js"
+import { applyDiff } from "./render.js"
 
 // 레지스트리에 컴포넌트 등록
 registry.add('todos', todosView)
@@ -15,7 +16,6 @@ const state = {
     currentFilter: 'All'
 }
 
-
 /**
  * 모든 DOM 조작이나 애니메이션은 requestAnimationFrame을 기반으로 해야 더 효율적이다.
  * - 메인 스레드를 차단하지 않는다
@@ -27,7 +27,7 @@ const render = () => {
         // 최초 DOM
         const main = document.querySelector('.todoapp')
         const newMain = registry.renderRoot(main, state)
-        main.replaceWith(newMain)
+        applyDiff(document.body, main, newMain)
     })
 }
 
