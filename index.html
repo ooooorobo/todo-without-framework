@@ -5,6 +5,17 @@
     <title>TODO</title>
 </head>
 <body>
+<template id="todo-item">
+    <li>
+        <div class="view">
+            <input class="toggle" type="checkbox">
+            <label></label>
+            <button class="destroy"></button>
+        </div>
+        <input class="edit">
+    </li>
+</template>
+<template id="todo-app">
     <section class="todoapp">
         <header class="header">
             <h1>투두</h1>
@@ -14,7 +25,8 @@
             <input type="checkbox" id="toggle-all" class="toggle-all">
             <label for="toggle-all">모두 체크</label>
             <!--            선언적 방식 컴포넌트 (1) - 필터링된 투두 리스트-->
-            <ul class="todo-list" data-component="todos"></ul>
+            <ul class="todo-list" data-component="todos">
+            </ul>
         </section>
         <footer class="footer">
             <!--            선언적 방식 컴포넌트 (2) - 완료되지 않은 투두 수-->
@@ -39,6 +51,10 @@
     <footer class="info">
         <p>투두를 더블 클릭해서 수정할 수 있어요</p>
     </footer>
-    <script type="module" src="index.js"></script>
+</template>
+    <div id="root">
+        <div data-component="app"></div>
+    </div>
+    <script type="module" src="core/index.js"></script>
 </body>
 </html>

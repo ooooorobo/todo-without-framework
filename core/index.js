@@ -1,11 +1,13 @@
-import getTodos from './getTodos.js'
+import getTodos from '../data/getTodos.js'
 import { registry } from "./registry.js"
-import todosView from "./view/todosView.js"
-import counterView from "./view/counterView.js"
-import filtersView from "./view/filtersView.js"
+import todosView from "../components/todosView.js"
+import counterView from "../components/counterView.js"
+import filtersView from "../components/filtersView.js"
+import app from "../components/app.js"
 import { applyDiff } from "./render.js"
 
 // 레지스트리에 컴포넌트 등록
+registry.add('app', app)
 registry.add('todos', todosView)
 registry.add('counter', counterView)
 registry.add('filters', filtersView)
@@ -25,7 +27,7 @@ const state = {
 const render = () => {
     window.requestAnimationFrame(() => {
         // 최초 DOM
-        const main = document.querySelector('.todoapp')
+        const main = document.querySelector('#root')
         const newMain = registry.renderRoot(main, state)
         applyDiff(document.body, main, newMain)
     })
