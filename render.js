@@ -41,6 +41,16 @@ export const applyDiff = (parentNode, realNode, virtualNode) => {
     }
 }
 
+/**
+ * 두 노드 간에 차이점이 있는지 확인
+ * 1. 속성 개수
+ * 2. 속성값
+ * 3. 자식 개수
+ * 4. 노드 내용
+ * @param node1
+ * @param node2
+ * @returns {boolean} - 두 노드 간에 차이점 있는 경우 true
+ */
 const isNodeChanged = (node1, node2) => {
     const n1Atrs = node1.attributes
     const n2Atrs = node2.attributes
