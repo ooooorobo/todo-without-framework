@@ -1,12 +1,20 @@
-import view from './view.js'
 import getTodos from './getTodos.js'
+import { registry } from "./registry.js"
+import todosView from "./view/todosView.js"
+import counterView from "./view/counterView.js"
+import filtersView from "./view/filtersView.js"
 
+// 레지스트리에 컴포넌트 등록
+registry.add('todos', todosView)
+registry.add('counter', counterView)
+registry.add('filters', filtersView)
+
+// 초기 상태 설정
 const state = {
     todos: getTodos(),
     currentFilter: 'All'
 }
 
-const main = document.querySelector('.todoapp')
 
 /**
  * 모든 DOM 조작이나 애니메이션은 requestAnimationFrame을 기반으로 해야 더 효율적이다.
@@ -15,6 +23,8 @@ const main = document.querySelector('.todoapp')
  * [브라우저 렌더링(HTML 로드) -> 다음 렌더링 대기 -> 새 가상 노드(view.js) -> DOM 조작(index.js) -> 브라우저 렌더링]
  */
 window.requestAnimationFrame(() => {
-    const newMain = view(main, state)
+    // 최초 DOM
+    const main = document.querySelector('.todoapp')
+    const newMain = registry.renderRoot(main, state)
     main.replaceWith(newMain)
 })
