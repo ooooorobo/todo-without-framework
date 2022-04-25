@@ -32,6 +32,27 @@ const events = {
             completed: false
         })
         render()
+    },
+    updateItem: (index, text) => {
+        state.todos[index].text = text
+        render()
+    },
+    toggleItemCompleted: (index) => {
+        const {completed} = state.todos[index]
+        state.todos[index].completed = !completed
+        render()
+    },
+    completeAll: () => {
+        state.todos.forEach(t => t.completed = true)
+        render()
+    },
+    clearCompleted: () => {
+        state.todos = state.todos.filter(t => !t.completed)
+        render()
+    },
+    changeFilter: filter => {
+        state.currentFilter = filter
+        render()
     }
 }
 
