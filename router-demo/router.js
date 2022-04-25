@@ -40,5 +40,10 @@ export default () => {
         checkRoutes()
     }
 
+    // 프로그래밍 방식을 위한 메서드
+    router.navigate = fragment => {
+        window.location.hash = fragment
+    }
+
     return router
 }
