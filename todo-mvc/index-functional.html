@@ -15,27 +15,6 @@
         <input class="edit">
     </li>
 </template>
-<template id="footer">
-    <footer class="footer">
-        <!--            선언적 방식 컴포넌트 (2) - 완료되지 않은 투두 수-->
-        <span class="todo-count"></span>
-        <!--            선언적 방식 컴포넌트 (3) - 선택 여부를 보여주는 필터-->
-        <ul class="filters">
-            <li>
-                <a data-filter="All" href="#/">모두</a>
-            </li>
-            <li>
-                <a data-filter="Todo" href="#/active">할 일만</a>
-            </li>
-            <li>
-                <a data-filter="Completed" href="#/completed">한 일만</a>
-            </li>
-        </ul>
-        <button class="clear-completed">
-            한 일 지우기
-        </button>
-    </footer>
-</template>
 <template id="todo-app">
     <section class="todoapp">
         <header class="header">
@@ -46,15 +25,36 @@
             <input type="checkbox" id="toggle-all" class="toggle-all">
             <label for="toggle-all">모두 체크</label>
             <!--            선언적 방식 컴포넌트 (1) - 필터링된 투두 리스트-->
-            <todomvc-list></todomvc-list>
+            <ul class="todo-list" data-component="todos">
+            </ul>
         </section>
-        <todomvc-footer></todomvc-footer>
+        <footer class="footer">
+            <!--            선언적 방식 컴포넌트 (2) - 완료되지 않은 투두 수-->
+            <span class="todo-count" data-component="counter"></span>
+            <!--            선언적 방식 컴포넌트 (3) - 선택 여부를 보여주는 필터-->
+            <ul class="filters" data-component="filters">
+                <li>
+                    <a href="#/">모두</a>
+                </li>
+                <li>
+                    <a href="#/active">할 일만</a>
+                </li>
+                <li>
+                    <a href="#/completed">한 일만</a>
+                </li>
+            </ul>
+            <button class="clear-completed">
+                한 일 지우기
+            </button>
+        </footer>
     </section>
     <footer class="info">
         <p>투두를 더블 클릭해서 수정할 수 있어요</p>
     </footer>
 </template>
-    <todomvc-app></todomvc-app>
-    <script type="module" src="core/controller.js"></script>
+<div id="root">
+    <div data-component="app"></div>
+</div>
+<script type="module" src="core/controller.js"></script>
 </body>
 </html>

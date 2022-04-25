@@ -14,6 +14,12 @@ const addEvents = (targetElement, events) => {
             e.target.value = ''
         }
     })
+    targetElement.querySelector('#toggle-all').addEventListener('change', e => {
+        events.completeAll();
+    })
+    targetElement.querySelector('.clear-completed').addEventListener('click', () => {
+        events.clearCompleted();
+    })
 }
 
 export default (targetElement, state, events) => {

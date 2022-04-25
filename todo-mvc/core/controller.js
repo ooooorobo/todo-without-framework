@@ -8,6 +8,7 @@ import { applyDiff } from "./diff.js"
 import AppComponent from "../components/web-component/AppComponent.js"
 import ListComponent from "../components/web-component/ListComponent.js"
 import FooterComponent from "../components/web-component/FooterComponent.js"
+import modelFactory from '../model/model.js'
 
 // 레지스트리에 컴포넌트 등록
 registry.add('app', app)
@@ -15,44 +16,36 @@ registry.add('todos', todosView)
 registry.add('counter', counterView)
 registry.add('filters', filtersView)
 
-// 초기 상태 설정
-const state = {
-    todos: getTodos(),
-    currentFilter: 'All'
-}
+const model = modelFactory()
 
 const events = {
     deleteItem: (index) => {
-        state.todos.splice(index, 1)
-        render()
+        model.deleteItem(index)
+        render(model.getState())
     },
     addItem: (text) => {
-        state.todos.push({
-            text,
-            completed: false
-        })
-        render()
+        model.addItem(text)
+        render(model.getState())
     },
     updateItem: (index, text) => {
-        state.todos[index].text = text
-        render()
+        model.updateItem(index, text)
+        render(model.getState())
     },
     toggleItemCompleted: (index) => {
-        const {completed} = state.todos[index]
-        state.todos[index].completed = !completed
-        render()
+        model.toggleItemCompleted(index)
+        render(model.getState())
     },
     completeAll: () => {
-        state.todos.forEach(t => t.completed = true)
-        render()
+        model.completeAll()
+        render(model.getState())
     },
     clearCompleted: () => {
-        state.todos = state.todos.filter(t => !t.completed)
-        render()
+        model.clearCompleted()
+        render(model.getState())
     },
     changeFilter: filter => {
-        state.currentFilter = filter
-        render()
+        model.changeFilter(filter)
+        render(model.getState())
     }
 }
 
@@ -62,7 +55,7 @@ const events = {
  * - 다음 리페인트가 이벤트 루프에서 스케줄링되기 직전에 실행된다.
  * [브라우저 렌더링(HTML 로드) -> 다음 렌더링 대기 -> 새 가상 노드(view.js) -> DOM 조작(index.js) -> 브라우저 렌더링]
  */
-const render = () => {
+const render = (state) => {
     window.requestAnimationFrame(() => {
         // 최초 DOM
         const main = document.querySelector('#root')
@@ -71,7 +64,7 @@ const render = () => {
     })
 }
 // 함수형으로 렌더링할 경우
-// render()
+render(model.getState())
 
 // 웹 컴포넌트를 사용하기 위해 레지스트리에 웹 컴포넌트를 등록한다
 window.customElements.define('todomvc-app', AppComponent)
