@@ -8,10 +8,10 @@ const router = createRouter()
 
 // 프래그먼트 방식
 router
-    .addRoute('#/', pages.home)
-    .addRoute('#/list', pages.list)
-    .addRoute('#/list/:id', pages.detail)
-    .addRoute('#/list/:id/:anotherId', pages.moreDetail)
+    .addRoute('/', pages.home)
+    .addRoute('/list', pages.list)
+    .addRoute('/list/:id', pages.detail)
+    .addRoute('/list/:id/:anotherId', pages.moreDetail)
     .setNotFound(pages.notFound)
     .start()
 
